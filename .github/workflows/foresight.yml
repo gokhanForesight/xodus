@@ -37,4 +37,9 @@ jobs:
         with:
           apikey: ${{ secrets.THUNDRA_APIKEY }}
           project_id: ${{ secrets.PROJECT_ID }}
-          command: ./gradlew -Dorg.gradle.daemon=false -d -s clean build 
+      - name: Manual gradle
+        run: ./gradlew -Dorg.gradle.daemon=false clean build --init-script $THUNDRA_GRADLE_INIT_SCRIPT_PATH
+        env:
+          THUNDRA_AGENT_REPORT_REST_BASEURL: https://collector.thundra.us/v1
+          THUNDRA_AGENT_DEBUG_ENABLE: true
+        
